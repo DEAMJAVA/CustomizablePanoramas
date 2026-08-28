@@ -1,0 +1,38 @@
+{
+	"schemaVersion": 1,
+	"id": "customizable-panoramas",
+	"version": "${version}",
+	"name": "Customizable Panoramas",
+	"description": "Customize Your Panoramas easily!",
+	"authors": [
+		"DEAMJAVA"
+	],
+	"contact": {
+		"homepage": "https://github.com/FabricMC/CustomizablePanoramas",
+		"sources": "https://github.com/FabricMC/CustomizablePanoramas"
+	},
+	"license": "GPLv3",
+	"icon": "assets/customizable-panoramas/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"client": [
+			{
+				"value": "net.deamjava.customizable_panoramas.client.CustomizablePanoramasClient",
+				"adapter": "kotlin"
+			}
+		]
+	},
+	"mixins": [
+		{
+			"config": "customizable-panoramas.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~26.2",
+		"java": ">=25",
+		"fabric-api": "*",
+		"fabric-language-kotlin": "*"
+	}
+}
