@@ -1,0 +1,11 @@
+{
+  "customizable-panoramas.button.manage": "Panoramas",
+  "customizable-panoramas.screen.manage.title": "Customizable Panoramas",
+  "customizable-panoramas.screen.name_panorama.title": "Set Name",
+  "customizable-panoramas.screen.name_panorama.field": "Custom Panorama",
+  "customizable-panoramas.screen.name_panorama.confirm": "Save",
+  "customizable-panoramas.screen.manage.rename": "Rename",
+  "customizable-panoramas.screen.manage.delete": "Delete",
+  "key.customizable-panoramas.capture": "Capture Panorama",
+  "key.category.customizable-panoramas.customizable-panoramas": "Capture Panorama"
+}
