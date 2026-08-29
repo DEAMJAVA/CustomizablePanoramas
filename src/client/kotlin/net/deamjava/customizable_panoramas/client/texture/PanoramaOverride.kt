@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory
 object PanoramaOverride {
 	private val LOGGER = LoggerFactory.getLogger("customizable-panoramas")
 	private var cachedSlug: String? = null
+	private var cachedIdentifier: Identifier? = null
 	private var cachedTexture: AbstractTexture? = null
 
 	fun activate(slug: String?) {
@@ -26,6 +27,7 @@ object PanoramaOverride {
 			texture.apply(contents)
 
 			cachedSlug = slug
+			cachedIdentifier = identifier
 			cachedTexture = texture
 		} catch (e: Exception) {
 			LOGGER.error("Failed to activate custom panorama '{}'", slug, e)
@@ -34,8 +36,8 @@ object PanoramaOverride {
 			} catch (releaseError: Exception) {
 				LOGGER.warn("Failed to release partially-registered texture for '{}'", slug, releaseError)
 			}
-			texture.close()
 			cachedSlug = null
+			cachedIdentifier = null
 			cachedTexture = null
 		}
 	}
@@ -43,8 +45,16 @@ object PanoramaOverride {
 	fun currentOverride(): AbstractTexture? = cachedTexture
 
 	fun release() {
-		cachedTexture?.close()
+		val identifier = cachedIdentifier
+		if (identifier != null) {
+			try {
+				Minecraft.getInstance().textureManager.release(identifier)
+			} catch (e: Exception) {
+				LOGGER.warn("Failed to release panorama texture for '{}'", cachedSlug, e)
+			}
+		}
 		cachedSlug = null
+		cachedIdentifier = null
 		cachedTexture = null
 	}
 }
