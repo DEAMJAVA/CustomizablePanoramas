@@ -24,7 +24,7 @@ private val FACES = listOf(
 )
 
 
-private const val SETTLE_TICKS = 5
+private const val SETTLE_TICKS = 15
 
 
 object PanoramaCapture {
@@ -51,7 +51,7 @@ object PanoramaCapture {
 	val inProgress: Boolean get() = active != null
 
 
-	const val CAPTURE_SIZE = 1024
+	const val CAPTURE_SIZE = 1024 * 2
 
 	fun start(): CompletableFuture<Path> {
 		val minecraft = Minecraft.getInstance()
@@ -136,7 +136,7 @@ object PanoramaCapture {
 		player.yRot = face.yaw
 		player.xRot = face.pitch
 		capture.faceIndex = index
-		capture.ticksRemaining = SETTLE_TICKS + if (index == 0) 1 else 0
+		capture.ticksRemaining = SETTLE_TICKS + if (index == 0) 10 else 0
 		capture.awaitingScreenshot = false
 	}
 
@@ -149,7 +149,7 @@ object PanoramaCapture {
 		val face = FACES[capture.faceIndex]
 		val outFile = capture.stagingDir.resolve("${face.layerIndex}.png")
 		try {
-			image.writeToFile(outFile) // already square, straight from the framebuffer
+			image.writeToFile(outFile)
 		} catch (e: IOException) {
 			failCapture(capture, e)
 			return
