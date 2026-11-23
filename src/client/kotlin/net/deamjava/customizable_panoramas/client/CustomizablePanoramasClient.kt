@@ -12,7 +12,6 @@ import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper
 import net.minecraft.client.KeyMapping
 import net.minecraft.client.Minecraft
 import net.minecraft.resources.Identifier
-import org.lwjgl.glfw.GLFW
 import org.slf4j.LoggerFactory
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
@@ -26,8 +25,7 @@ object CustomizablePanoramasClient : ClientModInitializer {
 
 	private val captureKey = KeyMapping(
 		"key.customizable-panoramas.capture",
-		InputConstants.Type.KEYSYM,
-		GLFW.GLFW_KEY_UNKNOWN,
+		InputConstants.UNKNOWN.value,
 		category
 	)
 
